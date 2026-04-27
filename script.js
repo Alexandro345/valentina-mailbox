@@ -1,6 +1,9 @@
 // LISTA DE CARTAS (Agrega aquí todas las que quieras)
 const misCartas = [
-    { id: 1, titulo: "CARTA 01", mensaje: "Eres la persona más especial del mundo. Gracias por estar conmigo hoy y siempre. ♥" },
+    { id: 1, titulo: "CARTA 01", mensaje: "<p>Tu sonrisa ilumina mis días y tu presencia llena mi corazón de alegría. 🐱💕</p
+      <p>No hay palabras suficientes para decirte cuánto te quiero. Gracias por existir, por ser tú, por hacer que todo valga la pena. 🌟</p>
+      <p>Con todo mi amor,<br><strong>Alexandro.💘</strong></p>
+    </div>" },
     { id: 2, titulo: "CARTA 02", mensaje: "Hoy me acordé de ti y sonreí. Solo quería recordarte cuánto te quiero." },
     { id: 3, titulo: "CARTA 03", mensaje: "¡Esta es una carta sorpresa! Espero que te guste mucho este buzón." },
     { id: 4, titulo: "CARTA 04", mensaje: "¡Mira! Una cuarta carta aparece mágicamente en la lista." },
