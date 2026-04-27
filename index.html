@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Buzón de Cartas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="stars-container">
+        <div class="star" style="top:10%; left:20%"></div>
+        <div class="star" style="top:30%; left:70%"></div>
+        <div class="star" style="top:50%; left:40%"></div>
+        <div class="star" style="top:70%; left:10%"></div>
+        <div class="star" style="top:85%; left:80%"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <h1>MIS CARTAS</h1>
+            <p class="contador" id="contador-cartas">Tienes 0 cartas</p>
+        </header>
+
+        <main id="lista-cartas" class="grid-cartas">
+            </main>
+    </div>
+
+    <div id="overlay" class="overlay">
+        <div class="modal-contenido">
+            <div id="wrapper-sobre" class="wrapper-sobre">
+                <img src="sobre-cerrado.png" id="img-modal" class="pixel-art">
+                <div id="carta-papel" class="carta-papel">
+                    <div class="texto-interior">
+                        <p id="mensaje-carta"></p>
+                    </div>
+                    <button class="btn-cerrar" onclick="cerrarCarta()">CERRAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

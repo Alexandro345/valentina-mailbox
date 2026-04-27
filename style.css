@@ -1,0 +1,146 @@
+:root {
+    --color-fondo: #0d0b1a;
+    --color-primario: #ff8bbf;
+    --color-papel: #fff5f7;
+}
+
+body {
+    background-color: var(--color-fondo);
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* --- FONDO DE ESTRELLAS --- */
+.stars-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    box-shadow: 0 0 10px white;
+    animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* --- CONTENEDOR PRINCIPAL --- */
+.app-container {
+    width: 100%;
+    max-width: 430px; /* Ancho iPhone Pro Max */
+    padding: 40px 20px;
+    text-align: center;
+}
+
+h1 { font-size: 18px; color: var(--color-primario); margin-bottom: 5px; }
+.contador { font-size: 8px; color: #888; margin-bottom: 30px; }
+
+.grid-cartas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.sobre-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: fadeIn 0.5s ease backwards;
+}
+
+.pixel-art {
+    image-rendering: pixelated;
+    width: 64px; /* Escalado x2 de tus 32px */
+    height: auto;
+    transition: transform 0.2s;
+}
+
+.sobre-item span { font-size: 8px; color: #ffb8bd; }
+
+/* --- OVERLAY Y ANIMACIÓN DE APERTURA --- */
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    transition: background 0.5s ease;
+    z-index: 100;
+}
+
+.overlay.activo {
+    background: rgba(0,0,0,0.85);
+    pointer-events: auto;
+}
+
+.wrapper-sobre {
+    transform: scale(0);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.overlay.activo .wrapper-sobre { transform: scale(2.5); } /* Zoom para lectura */
+
+.carta-papel {
+    position: absolute;
+    top: 0;
+    width: 80px;
+    background: var(--color-papel);
+    padding: 10px;
+    border-radius: 2px;
+    opacity: 0;
+    z-index: -1;
+    transition: transform 0.6s ease, opacity 0.3s;
+}
+
+.carta-papel.abierta {
+    transform: translateY(-50px); /* Sale del sobre hacia arriba */
+    opacity: 1;
+    z-index: 1;
+}
+
+.texto-interior {
+    color: #333;
+    font-size: 5px;
+    line-height: 1.4;
+    text-align: left;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.btn-cerrar {
+    margin-top: 10px;
+    background: var(--color-primario);
+    border: none;
+    font-family: inherit;
+    font-size: 4px;
+    padding: 5px;
+    width: 100%;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
