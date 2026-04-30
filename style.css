@@ -31,7 +31,7 @@ body {
         no-repeat, 
         repeat;
     background-size: 
-        120px, 
+        128px, 
         640px, 
         320px;
     background-attachment: 
@@ -42,6 +42,11 @@ body {
     
     /* Espacio para que el gato no tape cartas */
     padding-bottom: 250px; 
+
+    image-rendering: -moz-crisp-edges;         /* Firefox */
+    image-rendering: -webkit-optimize-contrast; /* Safari (iPhone) */
+    image-rendering: pixelated;                 /* Chrome y estándar */
+    image-rendering: crisp-edges;               /* General */
 }
 
 .app-container {
@@ -161,4 +166,9 @@ h1 { font-size: 18px; color: var(--color-primario); text-shadow: 3px 3px #000; }
 @keyframes aparecer {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+img, .pixel-art {
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: pixelated !important;
 }
