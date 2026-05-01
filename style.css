@@ -21,7 +21,7 @@ body {
     background-image: 
         url('luna.png'), 
         url('suelo-gato.png'), 
-        url('fondo-cielo.png');
+        url('cielo\ 2.aseprite');
     background-position: 
         top 30px right 30px, 
         bottom left, 
@@ -171,4 +171,26 @@ h1 { font-size: 18px; color: var(--color-primario); text-shadow: 3px 3px #000; }
 img, .pixel-art {
     image-rendering: -webkit-optimize-contrast !important;
     image-rendering: pixelated !important;
+}
+
+.header-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Espacio entre el corazón y el texto */
+    margin-bottom: 5px;
+}
+
+.corazon-pixel {
+    width: 24px; /* Ajusta el tamaño según tu gusto */
+    height: auto;
+    image-rendering: pixelated; /* Para que no se vea borroso */
+    image-rendering: -webkit-optimize-contrast; /* Para iPhone */
+}
+
+/* Ajustamos el h1 para que no tenga márgenes que rompan la alineación */
+.header-titulo h1 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--color-primario);
 }
