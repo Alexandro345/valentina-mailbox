@@ -21,7 +21,7 @@ body {
     background-image: 
         url('luna.png'), 
         url('suelo-gato.png'), 
-        url('cielo\ 2.aseprite');
+        url('fondo-cielo.png');
     background-position: 
         top 30px right 30px, 
         bottom left, 
@@ -173,24 +173,33 @@ img, .pixel-art {
     image-rendering: pixelated !important;
 }
 
-.header-titulo {
+.header-content {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px; /* Espacio entre el corazón y el texto */
-    margin-bottom: 5px;
+    align-items: center; /* Alinea verticalmente al centro */
+    justify-content: center; /* Centra todo horizontalmente */
+    gap: 15px; /* Espacio entre los corazones y el texto */
+    margin-bottom: 10px; /* Espacio respecto al contador de abajo */
 }
 
+/* Ajuste para los corazones */
 .corazon-pixel {
-    width: 24px; /* Ajusta el tamaño según tu gusto */
+    width: 96px; /* Ajusta este tamaño según veas necesario */
     height: auto;
-    image-rendering: pixelated; /* Para que no se vea borroso */
-    image-rendering: -webkit-optimize-contrast; /* Para iPhone */
+
+    image-rendering: pixelated;
+    image-rendering: -webkit-optimize-contrast;
+    /* Opcional: animación de latido */
+    animation: latido 0.8s infinite alternate ease-in-out;
 }
 
-/* Ajustamos el h1 para que no tenga márgenes que rompan la alineación */
-.header-titulo h1 {
+/* Quitamos márgenes extra del h1 para que no rompa la fila */
+.header-content h1 {
     margin: 0;
-    font-size: 18px;
-    color: var(--color-primario);
+    font-size: 18px; /* Ajusta si lo sientes muy grande en PC */
+    line-height: 1;
+}
+
+@keyframes latido {
+    from { transform: scale(1); }
+    to { transform: scale(1.15); }
 }
