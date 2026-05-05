@@ -127,6 +127,11 @@ function abrirCarta(mensaje, esRupia = false, rutaImagen = "") {
 
 function cerrarCarta() {
     papel.classList.remove('abierta');
+    
+    const contenedorTexto = document.querySelector('.texto-interior');
+    if (contenedorTexto) {
+        contenedorTexto.scrollTop = 0;
+    }
     setTimeout(() => {
         overlay.classList.remove('activo');
         setTimeout(() => {

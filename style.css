@@ -20,19 +20,25 @@ body {
     overflow-x: hidden;
     -webkit-tap-highlight-color: transparent;
 
+    /* --- FONDO MULTICAPA --- */
     background-image: 
-        url('suelo-gato.png'),    /* Imagen 1 */
-        url('fondo-cielo.png');   /* Imagen 2 */
+        url('suelo-gato.png'),    /* Capa Superior (delante) */
+        url('fondo-cielo.png');   /* Capa Inferior (detrás) */
 
     background-repeat: no-repeat, repeat-y;
-    
     background-position: bottom center, top center;
-    
     background-size: 100% auto, 100% auto;
     
+    /* Cambiamos el suelo a 'scroll' para que se quede con el resto del mundo 
+       o 'fixed' si quieres que el gato siempre te siga abajo */
     background-attachment: fixed, scroll;
 
-    image-rendering: pixelated;
+    /* --- RENDERIZADO ANTI-BORROSO --- */
+    /* Estas 3 líneas juntas obligan a los navegadores a no suavizar los píxeles */
+    image-rendering: -moz-crisp-edges;         /* Firefox */
+    image-rendering: -webkit-optimize-contrast; /* Safari / Chrome viejo */
+    image-rendering: pixelated;                 /* Estándar moderno */
+    
     padding-bottom: 200px; 
 }
 
