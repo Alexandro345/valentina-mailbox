@@ -22,26 +22,30 @@ body {
 
     /* --- FONDO MULTICAPA --- */
     background-image: 
-        url('suelo-gato.png'),    /* Capa Superior (delante) */
-        url('fondo-cielo.png');   /* Capa Inferior (detrás) */
+        url('suelo-gato.png'),    /* Capa 1 */
+        url('fondo-cielo.png');   /* Capa 2 */
 
-    background-repeat: no-repeat, repeat-y;
-    background-position: bottom center, top center;
-    background-size: 100% auto, 100% auto;
+    /* Suelo: No se repite (no-repeat). Cielo: Solo vertical (repeat-y) */
+    background-repeat: no-repeat, repeat-y; 
     
-    /* Cambiamos el suelo a 'scroll' para que se quede con el resto del mundo 
-       o 'fixed' si quieres que el gato siempre te siga abajo */
+    /* Suelo: Abajo al centro. Cielo: Arriba al centro */
+    background-position: bottom center, top center;
+    
+    /* --- TAMAÑO ESCALADO (MÚLTIPLOS) --- */
+    /* Triplicamos el tamaño original para que se vea grande en el iPhone 
+       Suelo: 160x3 = 480px | 50x3 = 150px
+       Cielo: 80x6 = 480px  | 80x6 = 480px (para que cubra el ancho) */
+    background-size: 480px 150px, 480px 480px; 
+    
+    /* Suelo se queda abajo fijo, cielo se mueve al scrollear */
     background-attachment: fixed, scroll;
 
-    /* --- RENDERIZADO ANTI-BORROSO --- */
-    /* Estas 3 líneas juntas obligan a los navegadores a no suavizar los píxeles */
-    image-rendering: -moz-crisp-edges;         /* Firefox */
-    image-rendering: -webkit-optimize-contrast; /* Safari / Chrome viejo */
-    image-rendering: pixelated;                 /* Estándar moderno */
+    /* --- TRUCO DE NITIDEZ --- */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
     
     padding-bottom: 200px; 
 }
-
 /* REGLA DE NITIDEZ PARA PIXEL ART */
 img, .pixel-art, .corazon-pixel {
     image-rendering: -moz-crisp-edges;
