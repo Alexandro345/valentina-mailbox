@@ -11,31 +11,78 @@
 <body>
 
     <div class="app-container">
+        <!-- ENCABEZADO -->
         <header>
-            <img src="corazon.png" class="corazon-pixel">
-            <h1>MIS CARTAS</h1>
-            <img src="corazon.png" class="corazon-pixel">
+            <div class="header-content">
+                <img src="corazon.png" class="corazon-pixel">
+                <h1>MIS CARTAS</h1>
+                <img src="corazon.png" class="corazon-pixel">
+            </div>
             <p class="contador" id="contador-cartas">Cargando buzón...</p>
         </header>
 
+        <!-- LISTA DE CARTAS -->
         <main id="lista-cartas" class="grid-cartas">
-            </main>
+        </main>
     </div>
 
+    <!-- MODAL DE LECTURA (Aquí se abre el sobre o la Rupia) -->
     <div id="overlay" class="overlay">
         <div class="modal-contenido">
-            <div id="wrapper-sobre" class="wrapper-sobre">
+            
+            <div class="wrapper-sobre">
+                <!-- Esta imagen cambia automáticamente entre sobre-cerrado, sobre-abierto o rupi-azul -->
                 <img src="sobre-cerrado.png" id="img-modal" class="pixel-art">
+                
+                <!-- EL PAPEL QUE SUBE -->
                 <div id="carta-papel" class="carta-papel">
                     <div class="texto-interior">
+                        <!-- Aquí va el texto y, si la hay, la foto -->
                         <p id="mensaje-carta"></p>
                     </div>
                     <button class="btn-cerrar" onclick="cerrarCarta()">Volver al buzón</button>
                 </div>
             </div>
+
         </div>
     </div>
 
+    <!-- ZONA SECRETA DE ZELDA -->
+    <!-- Mueve los valores de 'bottom' y 'right' para ponerlo encima de tu dibujo -->
+    <div id="zona-secreta" onclick="descubrirRupia()" style="
+        position: fixed;
+        bottom: 3px; 
+        right: 3px; 
+        width: 30px;
+        height: 40px;
+        cursor: pointer;
+        z-index: 999;
+        touch-action: manipulation;
+
+    "></div>
+
+    <!-- Avioneta con cartel personalizado -->
+    <div class="avioneta-container">
+        <div class="avioneta-wrapper">
+            <!-- Avión -->
+            <img src="avion-morado.png" class="avion-sprite" alt="Avioneta A&V">
+            <!-- Cartel con corazón -->
+            <div class="cartel" id="texto-cartel">
+                A <img src="corazon.png" class="corazon-mini" alt="corazón"> V
+            </div>
+        </div>
+    </div>
+
+    <!-- Luna con iluminación -->
+    <div class="luna-iluminada">
+        <img src="luna.png" alt="Luna">
+    </div>
+    <!-- Audio opcional para el motor -->
+    <audio id="sonido-motor" src="motor-avion.mp3" loop></audio>
+    <!-- AUDIO -->
+    <audio id="sonido-zelda" src="zelda-item.mp3"></audio>
+
     <script src="script.js"></script>
+
 </body>
 </html>

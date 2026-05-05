@@ -1,7 +1,10 @@
+/* --- VARIABLES Y CONFIGURACIÓN GLOBAL --- */
 :root {
     --color-fondo: #0d0b1a;
     --color-primario: #ff8bbf;
     --color-papel: #fff5f7;
+    --color-lila-avion: #e6e0ff;
+    --color-morado-cartel: #4b0082;
 }
 
 body {
@@ -17,36 +20,28 @@ body {
     overflow-x: hidden;
     -webkit-tap-highlight-color: transparent;
 
-    /* --- SISTEMA DE CAPAS DE FONDO --- */
     background-image: 
-        url('luna.png'), 
-        url('suelo-gato.png'), 
-        url('fondo-cielo.png');
-    background-position: 
-        top 30px right 30px, 
-        bottom left, 
-        top center;
-    background-repeat: 
-        no-repeat, 
-        no-repeat, 
-        repeat;
-    background-size: 
-        128px, 
-        640px, 
-        320px;
-    background-attachment: 
-        scroll, 
-        fixed, 
-        scroll;
-    image-rendering: pixelated;
-    
-    /* Espacio para que el gato no tape cartas */
-    padding-bottom: 250px; 
+        url('suelo-gato.png'),    /* Imagen 1 */
+        url('fondo-cielo.png');   /* Imagen 2 */
 
-    image-rendering: -moz-crisp-edges;         /* Firefox */
-    image-rendering: -webkit-optimize-contrast; /* Safari (iPhone) */
-    image-rendering: pixelated;                 /* Chrome y estándar */
-    image-rendering: crisp-edges;               /* General */
+    background-repeat: no-repeat, repeat-y;
+    
+    background-position: bottom center, top center;
+    
+    background-size: 100% auto, 100% auto;
+    
+    background-attachment: fixed, scroll;
+
+    image-rendering: pixelated;
+    padding-bottom: 200px; 
+}
+
+/* REGLA DE NITIDEZ PARA PIXEL ART */
+img, .pixel-art, .corazon-pixel {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;
 }
 
 .app-container {
@@ -57,9 +52,35 @@ body {
     z-index: 2;
 }
 
-h1 { font-size: 18px; color: var(--color-primario); text-shadow: 3px 3px #000; }
+/* --- HEADER Y CORAZÓN --- */
+.header-content {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    gap: 15px; 
+    margin-bottom: 10px; 
+}
+
+.header-content h1 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--color-primario); 
+    text-shadow: 3px 3px #000;
+}
+
+.corazon-pixel {
+    width: 96px;
+    animation: latido 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes latido {
+    from { transform: scale(1); }
+    to { transform: scale(1.15); }
+}
+
 .contador { font-size: 8px; color: #888; margin-bottom: 40px; }
 
+/* --- GRID DE CARTAS --- */
 .grid-cartas {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -72,20 +93,18 @@ h1 { font-size: 18px; color: var(--color-primario); text-shadow: 3px 3px #000; }
     align-items: center;
     gap: 12px;
     cursor: pointer;
-    animation: aparecer 0.5s ease backwards;
+    touch-action: manipulation;
 }
 
 .pixel-art {
-    image-rendering: pixelated;
-    width: 80px; 
-    height: auto;
+    width: 100px; 
     transition: transform 0.2s;
 }
 
 .sobre-item:active .pixel-art { transform: scale(0.9); }
 .sobre-item span { font-size: 7px; color: #ffb8bd; }
 
-/* --- MODAL DE LECTURA --- */
+/* --- MODAL Y SOBRES --- */
 .overlay {
     position: fixed;
     top: 0; left: 0;
@@ -130,26 +149,34 @@ h1 { font-size: 18px; color: var(--color-primario); text-shadow: 3px 3px #000; }
 .carta-papel.abierta {
     transform: translateY(-60px);
     opacity: 1;
-    z-index: 1;
+    z-index: 10;
 }
 
 .texto-interior {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     color: #333;
-    font-size: 5px;
-    line-height: 1.5;
-    text-align: left;
-    max-height: 120px;
+    max-height: 150px;
     overflow-y: auto;
-
-    /* --- ESTO OCULTA LA BARRA --- */
-    scrollbar-width: none; /* Para Firefox */
-    -ms-overflow-style: none;  /* Para Internet Explorer y Edge antiguo */
-    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; 
 }
 
-/* Para Chrome, Safari (iPhone) y Edge moderno */
-.texto-interior::-webkit-scrollbar {
-    display: none;
+.texto-interior::-webkit-scrollbar { display: none; }
+
+#mensaje-carta {
+    width: 100%;
+    font-size: 6px;
+    line-height: 1.5;
+    white-space: pre-line;
+}
+
+.foto-carta {
+    width: 100%;
+    border: 3px solid white;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    image-rendering: auto !important;
+    margin-bottom: 10px;
 }
 
 .btn-cerrar {
@@ -160,46 +187,178 @@ h1 { font-size: 18px; color: var(--color-primario); text-shadow: 3px 3px #000; }
     font-size: 5px;
     padding: 6px;
     width: 100%;
-    cursor: pointer;
 }
 
-@keyframes aparecer {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+/* --- ANIMACIÓN RUPIA (ZELDA) - 8 SEGUNDOS --- */
+.animation-zelda {
+    animation: aparecerItemEpico 8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    transform-origin: center;
 }
 
-img, .pixel-art {
-    image-rendering: -webkit-optimize-contrast !important;
-    image-rendering: pixelated !important;
+@keyframes aparecerItemEpico {
+    0% { transform: translate(100px, 100px) scale(0); opacity: 0; }
+    12.5% { transform: translate(0, -30px) scale(2.8); filter: drop-shadow(0 0 30px rgba(0, 191, 255, 1)); opacity: 1; }
+
+    /* Palpitación Normal */
+    20%, 35%, 50% {
+        transform: translate(0, -20px) scale(1.8);
+        filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.6));
+    }
+    27%, 42%, 57% {
+        transform: translate(0, -25px) scale(2.3);
+        filter: drop-shadow(0 0 25px rgba(0, 191, 255, 1));
+    }
+
+    /* Aceleración */
+    62%, 68%, 74%, 80% { transform: translate(0, -22px) scale(1.9); filter: drop-shadow(0 0 15px rgba(0, 191, 255, 0.7)); }
+    65%, 71%, 77%, 83% { transform: translate(0, -28px) scale(2.5); filter: drop-shadow(0 0 35px rgba(0, 191, 255, 1.2)); }
+
+    /* Frenesí final */
+    86%, 90%, 94% { transform: translate(0, -24px) scale(2.0); }
+    88%, 92%, 96% { transform: translate(0, -28px) scale(2.6); }
+
+    100% { transform: translate(0, -10px) scale(1.5); filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.5)); opacity: 1; }
 }
 
-.header-content {
+/* --- AVIONETA Y CARTEL --- */
+.avioneta-container {
+    position: fixed;
+    top: 120px;
+    right: -600px;
+    z-index: 5;
+    pointer-events: none;
+    animation: cruzarCielo 30s linear infinite;
+}
+
+.avioneta-wrapper {
     display: flex;
-    align-items: center; /* Alinea verticalmente al centro */
-    justify-content: center; /* Centra todo horizontalmente */
-    gap: 15px; /* Espacio entre los corazones y el texto */
-    margin-bottom: 10px; /* Espacio respecto al contador de abajo */
+    align-items: center;
+    flex-direction: row; 
 }
 
-/* Ajuste para los corazones */
-.corazon-pixel {
-    width: 96px; /* Ajusta este tamaño según veas necesario */
+/* AVIÓN MÁS GRANDE */
+.avion-sprite {
+    width: 120px; /* Antes era 85px */
     height: auto;
-
     image-rendering: pixelated;
-    image-rendering: -webkit-optimize-contrast;
-    /* Opcional: animación de latido */
-    animation: latido 0.8s infinite alternate ease-in-out;
+    animation: vueloVibrante 2s ease-in-out infinite;
+    z-index: 7; 
 }
 
-/* Quitamos márgenes extra del h1 para que no rompa la fila */
-.header-content h1 {
-    margin: 0;
-    font-size: 18px; /* Ajusta si lo sientes muy grande en PC */
-    line-height: 1;
+/* HÉLICE AJUSTADA AL NUEVO TAMAÑO */
+.avioneta-wrapper::after {
+    content: "";
+    position: absolute;
+    left: -14px; /* Ajustado a la punta izquierda */
+    top: 35%;
+    width: 18px; /* Un poco más ancha */
+    height: 45px; /* Un poco más alta */
+    background: rgba(255, 255, 255, 0.3);
+    filter: blur(2px);
+    animation: heliceFlash 0.1s steps(2) infinite;
+    z-index: 8;
 }
 
-@keyframes latido {
-    from { transform: scale(1); }
-    to { transform: scale(1.15); }
+/* CARTEL MÁS GRANDE */
+.cartel {
+    background-color: var(--color-lila-avion);
+    color: var(--color-morado-cartel);
+    padding: 5px 10px; /* Más espacio */
+    border: 2px solid #8a2be2;
+    border-left: none; 
+    font-family: 'Courier New', monospace;
+    font-size: 30px; /* Letra más grande (antes 12px) */
+    font-weight: bold;
+    white-space: nowrap;
+    position: relative;
+    margin-left: -5px; 
+    animation: banderaOndeando 1.2s ease-in-out infinite;
+    transform-origin: left center;
+    
+    /* Flex para alinear el texto con el corazón */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px; /* Separación entre la A, el corazón y la V */
+}
+
+/* La cuerda del cartel */
+.cartel::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    width: 10px;
+    height: 2px;
+    background: #666;
+}
+
+/* EL CORAZÓN DENTRO DEL CARTEL */
+.corazon-mini {
+    width: 70px; /* Ajusta este valor si lo quieres más grande o chico */
+    height: auto;
+    image-rendering: pixelated;
+    animation: latido 0.8s infinite alternate ease-in-out; /* ¡Aprovechamos la animación que ya tienes! */
+}
+
+/* --- LUNA CON ILUMINACIÓN REALISTA --- */
+.luna-iluminada {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 1; /* Detrás de las cartas y avioneta */
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.luna-iluminada img {
+    width: 120px;
+    height: auto;
+    image-rendering: pixelated;
+    /* Resplandor exterior (glow) */
+    filter: drop-shadow(0 0 15px rgba(255, 255, 190, 0.7)) 
+            drop-shadow(0 0 40px rgba(255, 255, 200, 0.3));
+    /* Animación sutil de parpadeo de luz */
+    animation: brilloLuna 4s infinite alternate ease-in-out;
+}
+
+@keyframes brilloLuna {
+    from {
+        filter: drop-shadow(0 0 10px rgba(255, 255, 190, 0.6)) 
+                drop-shadow(0 0 30px rgba(255, 255, 200, 0.2));
+        transform: scale(1);
+    }
+    to {
+        filter: drop-shadow(0 0 20px rgba(255, 255, 190, 0.8)) 
+                drop-shadow(0 0 50px rgba(255, 255, 200, 0.4));
+        transform: scale(1.02);
+    }
+}
+
+@keyframes cruzarCielo {
+    0% {
+        right: -1000px; /* Bien lejos a la derecha */
+        transform: translateY(0);
+    }
+    100% {
+        right: 150%; /* Que cruce TODA la pantalla y desaparezca a la izquierda */
+        transform: translateY(20px);
+    }
+}
+
+@keyframes heliceFlash {
+    0% { opacity: 0; transform: scaleY(1); }
+    100% { opacity: 1; transform: scaleY(1.2); }
+}
+
+@keyframes banderaOndeando {
+    0%, 100% { transform: rotate(-2deg) skewY(1deg); }
+    50% { transform: rotate(3deg) skewY(-1deg); }
+}
+
+@keyframes vueloVibrante {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
 }
